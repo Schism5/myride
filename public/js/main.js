@@ -9,6 +9,9 @@ var studentsStore = {
             return student.tag !== tag;
         });
     },
+    get: function(tag) {
+        return this.ids[tag];
+    },
     data: [],
     ids: {}
 };
@@ -21,6 +24,9 @@ var els = {
     warningTemplate: $('#warning-template')
 };
 
+var currentSelectedStudent;
+var selectedListRow;
+
 $('#student-form').on('submit', function(evt) {
     evt.preventDefault();
 
@@ -31,26 +37,31 @@ $('#student-form').on('submit', function(evt) {
         success: function(data) {
             var student = data.data;
 
-            if(studentsStore.ids[student.tag]) {
+            if(studentsStore.get(student.tag)) {
                 return;
             }
 
-            var template = els.studentTemplate.html();
-            var html = Mustache.render(template, {
+            var html = Mustache.render(els.studentTemplate.html(), {
                 firstName: student.firstName,
                 lastName: student.lastName,
                 tag: student.tag
             });
 
             els.studentList.append(html);
-
             studentsStore.add(student);
 
-            $('a[data-toggle=list]:last-child button').on('click', {tag: student.tag}, function(evt) {
-                var removed = $(this).parent().remove();
-                if(removed) {
-                    studentsStore.remove(evt.data.tag);
-                }
+            $('a[data-toggle=list]:last-child button').on('click', {student: student}, function(evt) {
+                currentSelectedStudent = evt.data.student;
+                selectedListRow = $(this).parent();
+                var template = $('#student-card-template').html();
+                var html = Mustache.render(template, {
+                    firstName: currentSelectedStudent.firstName,
+                    lastName : currentSelectedStudent.lastName,
+                    tag: currentSelectedStudent.tag,
+                    time: new Date().toLocaleString()
+                });
+
+                $('body').append(html);
             });
         },
         error: function() {
@@ -61,6 +72,27 @@ $('#student-form').on('submit', function(evt) {
         }
     });
 });
+
+function confirmPickup() {
+    var removed = selectedListRow.remove();
+    if(removed) {
+        studentsStore.remove(currentSelectedStudent.tag);
+    }
+
+    selectedListRow = null;
+    currentSelectedStudent = null;
+
+    $('#mymodal').modal('toggle');
+    $('#mymodal').remove();
+}
+
+function cancelPickup() {
+    selectedListRow = null;
+    currentSelectedStudent = null;
+
+    $('#mymodal').modal('toggle');
+    $('#mymodal').remove();
+}
 
 function closeWarning() {
     els.warningAlert.css('display', 'none');
@@ -75,6 +107,6 @@ function showWarning(info) {
     alert.css('display', 'block');
 
     setTimeout(function() {
-        alert.css('display', 'none');
+        els.warningAlert.css('display', 'none');
     }, 5000);
 }
