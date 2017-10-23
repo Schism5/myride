@@ -1,21 +1,14 @@
 //const io = require('./../app');
-const Stash = require('./../util/stash');
+const RoomManager = require('./../util/RoomManager');
 
-module.exports = io => {
+module.exports = (io) => {
+    let i = 1;
     io.on('connection', (socket) => {
         console.log('new user connected to socket' + socket.id);
-        var stash = new Stash();
+        var manager = new RoomManager();
     
         socket.on('disconnect', () => {
             console.log('client disconnected from socket ' + socket.id);
-        });
-    
-        socket.emit('addstudent', {
-    
-        });
-    
-        socket.on('create-email', (email) => {
-            console.log(email);
         });
     });
 };

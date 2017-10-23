@@ -1,0 +1,59 @@
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <title>My Ride</title>
+
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+    </head>
+    <body class="container-fluid" style="padding:0;">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+             <a class="navbar-brand" href="#">Thatz My Ride</a>
+        </nav>
+
+        <div id="warning-alert" class="alert alert-warning alert-dismissible fade show" role="alert" style="display:none;">
+            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            <button type="button" class="close" data-dismiss="alert" onclick="closeAlert();">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <form id="student-form">
+            <!-- <div class="form-group">
+                <input type="text" name="tag" placeholder="Tag Number" autofocus autocomplete="off"/>                    
+            </div>
+            <button type="buttton" class="btn btn-primary">Submit</button> -->
+            <div class="input-group" style="padding:10px;">
+                <input type="text" class="form-control" name="tag" placeholder="Tag Number">
+                <span class="input-group-btn">
+                <button class="btn btn-primary" type="button">Add</button>
+                </span>
+            </div>
+        </form>
+
+        <div>
+            <ul id="student-list" class="list-group"></ul>
+        </div>
+
+        <script id="student-template" type="text/template">
+            <a href="#" data-toggle="list" class="list-group-item list-group-item-action">
+                {{ firstName }} {{ lastName }} ({{ tag }})
+            </a>
+        </script>
+
+        <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <!-- <script src="/js/lib/moment.js"></script>
+        <script src="/js/lib/deparam.js"></script> -->
+        <script src="/js/lib/mustache.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="/js/main.js"></script>
+    </body>
+</html>

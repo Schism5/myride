@@ -3,10 +3,15 @@ const socketio = require('socket.io');
 const bodyParser = require('body-parser');
 const fs = require('fs');
 const http = require('http');
+const path = require('path');
 
 require('./database/mongoose');
 
 var app = express();
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 var server = http.createServer(app);
 var io = socketio(server);
 
@@ -26,10 +31,8 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use('/student', require('./route/student'));
+app.use('/user', require('./route/user'));
 
 server.listen(port, () => {
     console.log(`Server up on port ${port}`);
