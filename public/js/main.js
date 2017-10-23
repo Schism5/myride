@@ -13,10 +13,22 @@ $('#student-form').on('submit', function(evt) {
                 lastName: student.lastName,
                 tag: student.tag
             });
+
             $('#student-list').append(html);
+
+            $('a[data-toggle=list]:last-child button').on('click', function() {
+                alert('need to add stuff here');
+            });
         },
         error: function() {
-            $('#warning-alert').css('display', 'block');
+            var alert = $('#warning-alert');
+            var text  = alert.find('div:first-child');
+            var html  = Mustache.render($('#alert-template').html(), {
+                text: 'No student found with tag ' + tag
+            });
+            
+            text.html(html);
+            alert.css('display', 'block');
         },
         complete: function() {
             field.val('');
