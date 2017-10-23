@@ -45,8 +45,41 @@
         <script id="student-template" type="text/template">
             <a href="#" data-toggle="list" class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
                 {{ firstName }} {{ lastName }} ({{ tag }})
-                <button class="btn btn-light">&check;</button>
+                <button class="btn btn-light" data-toggle="modal" data-target="#mymodal">&check;</button>
             </a>
+        </script>
+
+        <script id="student-card-template" type="text/template">
+            <!-- <div class="card" style="width: 20rem; position: absolute; z-index: 9999; top: 60px; margin-left: 30px;">
+                <div class="card-body">
+                    <h4 class="card-title">{{ firstName }} {{ lastName }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ tag }}</h6>
+
+                    <button class="btn btn-primary">Confirm Pickup</button>
+                    <button class="btn btn-secondary">Cancel</button>
+                </div>
+            </div> -->
+
+            <div class="modal" tabindex="-1" role="dialog" id="mymodal" style="top: 25%;">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"> Confirm Pickup</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="cancelPickup();">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>{{ firstName }} {{ lastName }}  ({{ tag }})</p>
+                                <p>{{ time }}</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" onclick="confirmPickup();">Confirm</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancelPickup();">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </script>
 
         <script
@@ -57,6 +90,7 @@
         <!-- <script src="/js/lib/moment.js"></script>
         <script src="/js/lib/deparam.js"></script> -->
         <script src="/js/lib/mustache.js"></script>
+        <script src="/css/bootstrap-4/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
         <script src="/js/main.js"></script>
     </body>
