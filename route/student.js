@@ -1,5 +1,5 @@
 var router  = require('express').Router();
-var Student = require('./../model/Student');
+var Student = require('./../model/student');
 var util = require('./../util/util');
 
 //for inserting seed data
