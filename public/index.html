@@ -11,23 +11,25 @@
     </head>
     <body class="container-fluid" style="padding:0;">
 
-        <nav class="navbar" style="background-color:#39e095; text-align:center;">
-             <span class="navbar-brand" style="color:white; font-weight:600; width: 100%;">Thatz My Ride</span>
-        </nav>
-
-        <form id="student-form">
-            <div class="input-group" style="padding:10px;">
-                <input type="text" class="form-control" name="tag" placeholder="Tag Number">
-                <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" onclick="$('#student-form').submit(); this.blur();">Add</button>
-                </span>
-            </div>
-        </form>
+        <div class="sticky-top" style="margin-bottom:15px;">
+            <nav class="navbar" style="background-color:#39e095; text-align:center;">
+                <span class="navbar-brand" style="color:white; font-weight:600; width: 100%;">Thatz My Ride</span>
+           </nav>
+   
+           <form id="student-form" style="background-color:rgba(14, 14, 14, 0.13);">
+               <div class="input-group" style="padding:10px;">
+                   <input type="text" class="form-control" name="tag" placeholder="Tag Number">
+                   <span class="input-group-btn">
+                   <button class="btn btn-primary" type="button" onclick="$('#student-form').submit(); this.blur();">Add</button>
+                   </span>
+               </div>
+           </form>
+        </div>
 
         <div id="warning-alert" class="alert alert-warning alert-dismissible fade show" role="alert" 
             style="display:none;">
             <div></div>
-            <button type="button" class="close" data-dismiss="alert" onclick="closeAlert();">
+            <button type="button" class="close" data-dismiss="alert" onclick="closeWarning();">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -36,7 +38,7 @@
             <ul id="student-list" class="list-group"></ul>
         </div>
 
-        <script id="alert-template" type="text/template">
+        <script id="warning-template" type="text/template">
             <span>{{ text }}</span>
         </script>
 
