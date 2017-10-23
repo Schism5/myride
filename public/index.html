@@ -11,37 +11,39 @@
     </head>
     <body class="container-fluid" style="padding:0;">
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-             <a class="navbar-brand" href="#">Thatz My Ride</a>
+        <nav class="navbar" style="background-color:#84EEBE; text-align:center;">
+             <span class="navbar-brand" style="color:white; font-weight:600; width: 100%;">Thatz My Ride</span>
         </nav>
 
-        <div id="warning-alert" class="alert alert-warning alert-dismissible fade show" role="alert" style="display:none;">
-            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+        <form id="student-form">
+            <div class="input-group" style="padding:10px;">
+                <input type="text" class="form-control" name="tag" placeholder="Tag Number">
+                <span class="input-group-btn">
+                <button class="btn btn-primary" type="button" onclick="$('#student-form').submit(); this.blur();">Add</button>
+                </span>
+            </div>
+        </form>
+
+        <div id="warning-alert" class="alert alert-warning alert-dismissible fade show" role="alert" 
+            style="display:none;">
+            <div></div>
             <button type="button" class="close" data-dismiss="alert" onclick="closeAlert();">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
 
-        <form id="student-form">
-            <!-- <div class="form-group">
-                <input type="text" name="tag" placeholder="Tag Number" autofocus autocomplete="off"/>                    
-            </div>
-            <button type="buttton" class="btn btn-primary">Submit</button> -->
-            <div class="input-group" style="padding:10px;">
-                <input type="text" class="form-control" name="tag" placeholder="Tag Number">
-                <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">Add</button>
-                </span>
-            </div>
-        </form>
-
         <div>
             <ul id="student-list" class="list-group"></ul>
         </div>
 
+        <script id="alert-template" type="text/template">
+            <span>{{ text }}</span>
+        </script>
+
         <script id="student-template" type="text/template">
-            <a href="#" data-toggle="list" class="list-group-item list-group-item-action">
+            <a href="#" data-toggle="list" class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
                 {{ firstName }} {{ lastName }} ({{ tag }})
+                <button class="btn btn-light">&check;</button>
             </a>
         </script>
 
